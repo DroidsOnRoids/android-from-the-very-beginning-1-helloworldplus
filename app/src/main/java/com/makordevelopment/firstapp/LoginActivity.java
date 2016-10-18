@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showMainScreen() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("login", editLogin.getText().toString());
         startActivity(intent);
     }
 
