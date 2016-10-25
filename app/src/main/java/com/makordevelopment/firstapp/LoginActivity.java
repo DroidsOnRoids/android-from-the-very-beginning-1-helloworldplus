@@ -1,14 +1,16 @@
 package com.makordevelopment.firstapp;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private static final String VALID_LOGIN = "a";
+    private static final String VALID_PASSWORD = "a";
 
     private EditText editLogin;
     private EditText editPassword;
@@ -47,21 +49,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isLoginAndPasswordValid() {
-        return editLogin.getText().toString().equals("a") &&
-                editPassword.getText().toString().equals("a");
+        return editLogin.getText().toString().equals(VALID_LOGIN) &&
+                editPassword.getText().toString().equals(VALID_PASSWORD);
     }
 
     private void showMainScreen() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("login", editLogin.getText().toString());
-        startActivity(intent);
+        startActivity(MainActivity.getStartingIntent(this, editLogin.getText().toString()));
     }
 
     private void showLoginErrorDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Błąd")
-                .setMessage("Podany login lub hasło są niepoprawne.")
-                .setPositiveButton("OK", null)
+                .setTitle(R.string.dialog_login_error_title)
+                .setMessage(R.string.dialog_login_error_message)
+                .setPositiveButton(R.string.ok, null)
                 .create()
                 .show();
     }

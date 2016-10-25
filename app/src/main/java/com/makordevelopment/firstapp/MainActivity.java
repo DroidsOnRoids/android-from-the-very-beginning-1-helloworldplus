@@ -1,13 +1,21 @@
 package com.makordevelopment.firstapp;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textLoggedUser;
+    private static final String EXTRA_LOGIN = "EXTRA_LOGIN";
+    private TextView textUserLogin;
+
+    public static Intent getStartingIntent(Context context, String login) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(EXTRA_LOGIN, login);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,18 +23,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViews();
-        setLoggedUser();
+        showUserLogin();
     }
 
     private void findViews() {
-        textLoggedUser = (TextView) findViewById(R.id.text_logged_user);
+        textUserLogin = (TextView) findViewById(R.id.text_logged_user);
     }
 
-    private void setLoggedUser() {
+    private void showUserLogin() {
         Bundle extras = getIntent().getExtras();
-        String loggedUserName = extras.getString("login");
-        if (loggedUserName != null) {
-            textLoggedUser.setText(loggedUserName);
+        String userLogin = extras.getString(EXTRA_LOGIN);
+        if (userLogin != null) {
+            textUserLogin.setText(userLogin);
         }
     }
 }

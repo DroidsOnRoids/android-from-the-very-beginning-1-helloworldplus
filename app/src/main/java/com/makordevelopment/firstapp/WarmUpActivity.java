@@ -1,19 +1,18 @@
 package com.makordevelopment.firstapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import java.util.Locale;
 
 public class WarmUpActivity extends AppCompatActivity {
 
-    private TextView textSeekbarValues;
+    private TextView textSeekBarValues;
     private SeekBar seekBar;
     private ImageView imageLogo;
 
@@ -31,10 +30,9 @@ public class WarmUpActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        textSeekbarValues = (TextView) findViewById(R.id.text_seekbar_values);
+        textSeekBarValues = (TextView) findViewById(R.id.text_seekbar_values);
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         imageLogo = (ImageView) findViewById(R.id.image_logo);
-
         buttonGoToLogin = (Button) findViewById(R.id.button_go_to_login);
     }
 
@@ -42,9 +40,9 @@ public class WarmUpActivity extends AppCompatActivity {
         seekBar.setMax(100);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                updateValuesInViews(i);
-                changeLayoutIfProgressIs100(i);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                updateProgressInViews(progress);
+                showGoToLoginButtonIfProgressIs100(progress);
             }
 
             @Override
@@ -63,29 +61,28 @@ public class WarmUpActivity extends AppCompatActivity {
         });
     }
 
-    private void updateValuesInViews(int i) {
-        textSeekbarValues.setText(convertProgressToText(i));
-        textSeekbarValues.setAlpha(convertProgressToAlpha(i));
-        imageLogo.setAlpha(convertProgressToAlpha(i));
+    private void updateProgressInViews(int progress) {
+        textSeekBarValues.setText(convertProgressToText(progress));
+        textSeekBarValues.setAlpha(convertProgressToAlpha(progress));
+        imageLogo.setAlpha(convertProgressToAlpha(progress));
     }
 
-    private String convertProgressToText(int i) {
-        return String.format(Locale.getDefault(), "%d%%", i);
+    private String convertProgressToText(int progress) {
+        return String.format(Locale.getDefault(), "%d%%", progress);
     }
 
-    private float convertProgressToAlpha(float i) {
-        return i / 100;
+    private float convertProgressToAlpha(float progress) {
+        return progress / 100.0f;
     }
 
     private void initTextAndImageValues() {
-        updateValuesInViews(seekBar.getProgress());
+        updateProgressInViews(seekBar.getProgress());
     }
 
 
-    private void changeLayoutIfProgressIs100(int i) {
-        if (i == 100) {
+    private void showGoToLoginButtonIfProgressIs100(int progress) {
+        if (progress == 100) {
             buttonGoToLogin.setVisibility(View.VISIBLE);
-            buttonGoToLogin.animate().alpha(1.0f).setDuration(2000);
         }
     }
 }
