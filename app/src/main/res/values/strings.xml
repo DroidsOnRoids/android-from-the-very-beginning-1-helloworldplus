@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">HelloWorld+</string>
 
-    <string name="dialog_login_error_title">Błąd</string>
-    <string name="dialog_login_error_message">Podany login lub hasło są niepoprawne.</string>
+    <string name="dialog_login_error_title">Error</string>
+    <string name="dialog_login_error_message">Login or password is wrong.</string>
     <string name="ok">OK</string>
 
-    <string name="go_to_login">Przejdź do logowania</string>
+    <string name="go_to_login">Go to Login</string>
 
     <string name="login">Login</string>
-    <string name="password">Hasło</string>
-    <string name="log_in">Zaloguj</string>
+    <string name="password">Password</string>
 </resources>
